@@ -4,22 +4,15 @@ $(document).ready(function(){
 
 function setupPlayer() {
 	var audio = $("#player audio")[0];
-	var sliderPrecision = 10000;
 	$("#player .playButton").on("click", function(){
 		audio.play();
 	});
 	$("#player .pauseButton").on("click", function(){
 		audio.pause();
 	});
-	$("#player .slider").slider({
-		max: sliderPrecision,
-	});
-	$("#player .slider").on("slidestop", function(event, ui) {
-		audio.currentTime = audio.duration*(ui.value / sliderPrecision);
-	});
-
+	$("#player .slider").slider();
 	$("#player audio").bind("timeupdate", function(){
-		var pos = sliderPrecision*(audio.currentTime / audio.duration);
-		$("#player .slider").slider("value", pos);
+		var pos = (audio.currentTime / audio.duration) * 100;
+		$("#player .slider").slider('setValue', pos);
 	});
 }
