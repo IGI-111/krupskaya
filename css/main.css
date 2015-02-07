@@ -1,22 +1,24 @@
-
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#player .slider .ui-slider-range
+{
+	background: rgba(0, 0, 0, 0.5);
+}
+#player .slider .ui-slider-handle
+{
+	display: none;
+	height: 110%;
+	width: 10px;
+}
+#player .slider
+{
+	height: 100px;
+	width: 100%;
+}
+#player .slider canvas
+{
+	background: none;
+	padding-top:    5px;
+	padding-bottom: 5px;
+	height: 100%;
+	width: 100%;
+}
 
