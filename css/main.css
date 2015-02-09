@@ -1,6 +1,6 @@
 #player .slider .ui-slider-range
 {
-	background: rgba(0, 0, 0, 0.2);
+	background: green;
 }
 #player .slider .ui-slider-handle
 {
@@ -8,17 +8,38 @@
 	height: 110%;
 	width: 10px;
 }
+#player .sliderContainer
+{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 100px;
+	display: block;
+	border-radius: 10px;
+	padding-left: 0.5%;
+	padding-right: 0.5%;
+	background: lightgrey;
+}
+#player canvas
+{
+	position: absolute;
+	height: 100%;
+	width: 99%;
+}
 #player .slider
 {
-	height: 100px;
-	width: 100%;
+	position: absolute;
+	top: 5%;
+	height: 90%;
+	width: 99%;
+	background: darkcyan;
 }
-#player .slider canvas
+#player canvas
 {
-	background: none;
 	padding-top:    5px;
 	padding-bottom: 5px;
-	height: 100%;
-	width: 100%;
+	background: none;
+	z-index: 1;
+	pointer-events:none;
 }
-
