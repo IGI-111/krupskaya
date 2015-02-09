@@ -41,7 +41,7 @@ server {
         }
 
 
-        location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+        location ~* \.(?:ico|css|js|gif|jpe?g|png|mp3)$ {
                 # Some basic cache-control for static files to be sent to the browser
                 expires max;
                 add_header Pragma public;
