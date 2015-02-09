@@ -3,7 +3,7 @@
 This is a simple single page music player written mostly in javascript and hosted at [krupskaya.machinemen.fr](http://krupskaya.machinemen.fr).
 
 Nginx configuration would look something like this:
-{% codeblock %}
+```Nginx
 server {
         listen 80;
         server_name krupskaya.machinemen.fr;
@@ -64,5 +64,5 @@ server {
         }
 
 }
-{% endcodeblock %}
+```
 
