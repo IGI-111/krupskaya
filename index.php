@@ -51,13 +51,13 @@
 
 		<div id="list" class="container">
 			<div class="col-md-2">
-				<div class="panel panel-default" file="hellmarch">
+				<div class="panel panel-default" file="01">
 					<div class="panel-heading">
 						Hell March
 					</div>
 					<div class="panel-body">
 						<a href="#">
-							<img class="media-object" src="data/hellmarch.jpg" alt="cover">
+							<img class="media-object" src="data/01.jpg" alt="cover">
 						</a>
 					</div>
 				</div>
