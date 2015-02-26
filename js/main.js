@@ -64,6 +64,7 @@ function Player() {
 		animate: 1000
 	});
 	$("#player .slider").on("slide", function(event, ui) {
+		console.log(self.audio.duration);
 		self.audio.currentTime = self.audio.duration*(ui.value / self.sliderPrecision);
 	});
 	$("#player audio").on("timeupdate", function(event, ui){
@@ -74,10 +75,10 @@ function Player() {
 	this.wave = new Waveform($("#player canvas"));
 	this.change = function(id){
 		// change audio value
-		$("#player audio").attr("src", "data/"+id+".mp3");
+		$("#player audio").attr("src", "song.php?r="+id);
 		$("#player .slider").slider("value", 0);
 		// change waveform data
-		$.get("song.php",{r:id}, function(data) {
+		$.get("metadata.php",{r:id}, function(data) {
 			self.wave.draw(data);
 		});
 	}
@@ -94,10 +95,10 @@ function Waveform(container) {
 		var offset = canvas.height*(2/3);
 		var leftBarGradient = ctx.createLinearGradient(0,0,0,offset);
 		leftBarGradient.addColorStop(0,"rgba(255,255,255,0.2)");
-		leftBarGradient.addColorStop(1,"rgba(255,255,255,0.3");
+		leftBarGradient.addColorStop(1,"rgba(255,255,255,0.3)");
 		var rightBarGradient = ctx.createLinearGradient(0,offset,0,offset + offset/2);
 		rightBarGradient.addColorStop(0,"rgba(255,255,255,0.2)");
-		rightBarGradient.addColorStop(1,"rgba(255,255,255,0.3");
+		rightBarGradient.addColorStop(1,"rgba(255,255,255,0.3)");
 
 		ctx.fillStyle = "lightgrey";
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
