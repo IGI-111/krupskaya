@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -40,6 +41,8 @@
 					</button>
 					<a class="navbar-brand" href="#">Krupskaya</a>
 				</div>
+				<div id="connection" class="navbar-collapse collapse">
+				</div>
 			</div>
 		</nav>
 
@@ -76,8 +79,8 @@
 			</div>
 		</div> <!-- /container -->        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-		<script>window.jQuery.ui || document.write('<script src="js/vendor/jquery-ui.min.js"><\/script>')</script>
-		<script src="js/vendor/bootstrap.min.js"></script>
-		<script src="js/main.js"></script>
-	</body>
+<script>window.jQuery.ui || document.write('<script src="js/vendor/jquery-ui.min.js"><\/script>')</script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>

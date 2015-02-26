@@ -1,11 +1,37 @@
 
 $(document).ready(function(){
+	$.get("connected.php", function(data) {
+		var setDisconnect = function() {
+			$("#connection").fadeOut(function(){
+				$("#connection").load("templates/disconnect.html", function(){
+					$("#connection button").click(function(){
+						$.post("disconnect.php");
+						setConnect();
+						return false;
+					})});
+			});
+		};
+		var setConnect = function() {
+			$("#connection").fadeOut(function(){
+				$("#connection").load("templates/connect.html", function(){
+					$("#connection form").submit(function(){
+						$.post("connect.php", $("#connection form").serialize());
+						setDisconnect();
+						return false;
+					})});
+			});
+		};
+		if(data)
+			setDisconnect();
+		else
+			setConnect();
+	});
 	var player;
 	$("#player").load("templates/player.html", function(){
 		player = new Player();
 		player.change("01");
 	});
-	
+
 	$("#list .panel").click(function(){
 		player.change($(this).attr("file"));
 		$("#list .panel").removeClass("panel-danger");
@@ -15,8 +41,7 @@ $(document).ready(function(){
 		$(this).toggleClass("panel-info");
 		$(this).toggleClass("panel-default");
 	});
-	
-})
+});
 
 function Player() {
 	var self = this;
@@ -54,22 +79,21 @@ function Player() {
 		$("#player audio").attr("src", "data/"+id+".mp3");
 		$("#player .slider").slider("value", 0);
 		// change waveform data
-		$.get("song.php",{r:id})
-		 .done(function(data) {
+		$.get("song.php",{r:id}, function(data) {
 			self.wave.draw(data);
 		});
 	}
 }
 
 function Waveform(container) {
-	this.canvas = container[0];
+	canvas = container[0];
 
 	this.draw = function(data){
-		this.canvas.width = data.left.length;
-		var ctx = this.canvas.getContext('2d');
-		var increment = this.canvas.width/data.left.length;
+		canvas.width = data.left.length;
+		var ctx = canvas.getContext('2d');
+		var increment = canvas.width/data.left.length;
 
-		var offset = this.canvas.height*(2/3);
+		var offset = canvas.height*(2/3);
 		var leftBarGradient = ctx.createLinearGradient(0,0,0,offset);
 		leftBarGradient.addColorStop(0,"rgba(255,255,255,0.2)");
 		leftBarGradient.addColorStop(1,"rgba(255,255,255,0.3");
@@ -78,8 +102,8 @@ function Waveform(container) {
 		rightBarGradient.addColorStop(1,"rgba(255,255,255,0.3");
 
 		ctx.fillStyle = "lightgrey";
-		ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 		for (var i = 0, len = data.left.length; i < len; i++) {
 			var leftBarHeight = data.left[i]*(offset);
