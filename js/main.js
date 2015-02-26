@@ -4,6 +4,7 @@ $(document).ready(function(){
 		var setDisconnect = function() {
 			$("#connection").load("templates/disconnect.html", function(){
 				$("#connection button").click(function(){
+					$(this).prop("disabled", true);
 					$.post("disconnect.php");
 					$("#connection").fadeOut(setConnect);
 					return false;
@@ -12,6 +13,7 @@ $(document).ready(function(){
 		var setConnect = function() {
 			$("#connection").load("templates/connect.html", function(){
 				$("#connection form").submit(function(){
+					$(this).find("button").prop("disabled", true);
 					$.post("connect.php", $("#connection form").serialize());
 					$("#connection").fadeOut(setDisconnect);
 					return false;
