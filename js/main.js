@@ -2,24 +2,20 @@
 $(document).ready(function(){
 	$.get("connected.php", function(data) {
 		var setDisconnect = function() {
-			$("#connection").fadeOut(function(){
-				$("#connection").load("templates/disconnect.html", function(){
-					$("#connection button").click(function(){
-						$.post("disconnect.php");
-						setConnect();
-						return false;
-					})});
-			});
+			$("#connection").load("templates/disconnect.html", function(){
+				$("#connection button").click(function(){
+					$.post("disconnect.php");
+					$("#connection").fadeOut(setConnect);
+					return false;
+				})});
 		};
 		var setConnect = function() {
-			$("#connection").fadeOut(function(){
-				$("#connection").load("templates/connect.html", function(){
-					$("#connection form").submit(function(){
-						$.post("connect.php", $("#connection form").serialize());
-						setDisconnect();
-						return false;
-					})});
-			});
+			$("#connection").load("templates/connect.html", function(){
+				$("#connection form").submit(function(){
+					$.post("connect.php", $("#connection form").serialize());
+					$("#connection").fadeOut(setDisconnect);
+					return false;
+				})});
 		};
 		if(data)
 			setDisconnect();
