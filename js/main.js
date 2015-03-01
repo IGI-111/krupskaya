@@ -64,7 +64,6 @@ function Player() {
 		animate: 1000
 	});
 	$("#player .slider").on("slide", function(event, ui) {
-		console.log(self.audio.duration);
 		self.audio.currentTime = self.audio.duration*(ui.value / self.sliderPrecision);
 	});
 	$("#player audio").on("timeupdate", function(event, ui){
