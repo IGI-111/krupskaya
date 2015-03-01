@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	$.get("connected.php", function(data) {
 		var setDisconnect = function() {
@@ -27,7 +26,6 @@ $(document).ready(function(){
 	var player;
 	$("#player").load("templates/player.html", function(){
 		player = new Player();
-		player.change("01");
 	});
 
 	$("#list .panel").click(function(){
@@ -40,6 +38,8 @@ $(document).ready(function(){
 		$(this).toggleClass("panel-default");
 	});
 });
+
+
 
 function Player() {
 	var self = this;
@@ -80,6 +80,8 @@ function Player() {
 		$.get("metadata.php",{r:id}, function(data) {
 			self.wave.draw(data);
 		});
+		// autoplay
+		self.audio.play();
 	}
 }
 
