@@ -1,27 +1,8 @@
 $(document).ready(function(){
 	$.get("connected.php", function(data) {
-		var setDisconnect = function() {
-			$("#connection").load("templates/disconnect.html", function(){
-				$("#connection button").click(function(){
-					$(this).prop("disabled", true);
-					$.post("disconnect.php");
-					$("#connection").fadeOut(setConnect);
-					return false;
-				})});
-		};
-		var setConnect = function() {
-			$("#connection").load("templates/connect.html", function(){
-				$("#connection form").submit(function(){
-					$(this).find("button").prop("disabled", true);
-					$.post("connect.php", $("#connection form").serialize());
-					$("#connection").fadeOut(setDisconnect);
-					return false;
-				})});
-		};
+		var connectionButton = new ConnectionButton(data);
 		if(data)
-			setDisconnect();
-		else
-			setConnect();
+			UploadButton();
 	});
 	var player;
 	$("#player").load("templates/player.html", function(){
@@ -34,7 +15,7 @@ $(document).ready(function(){
 		$(this).toggleClass("panel-danger");
 	});
 	$("#list .panel").hover(function(){
-		$(this).toggleClass("panel-info");
+		$(this).toggleClass("panel-warning");
 		$(this).toggleClass("panel-default");
 	});
 });
@@ -116,4 +97,54 @@ function Waveform(container) {
 			ctx.fillRect(i*increment, Math.floor(offset), increment, Math.floor(rightBarHeight));
 		}
 	}
+}
+function ConnectionButton(isConnected) {
+	var setDisconnect = function() {
+		$("#connection").load("templates/disconnectButton.html", function(){
+			$("#connection button").click(function(){
+				$(this).prop("disabled", true);
+				$.post("disconnect.php");
+				$("#connection button").fadeOut(setConnect);
+			})});
+	};
+	var setConnect = function() {
+		$("#connection").load("templates/connectButton.html", function(){
+			$("#connection button").click(function(){
+				$("#connectionModal").load("templates/connectionForm.html", function(){
+					$("#connectionModal form").submit(function(event){
+						event.preventDefault();
+						$.post("connect.php", $("#connectionModal form").serialize())
+						.done(function(){
+							$("#connectionModal").find("button").prop("disabled", true);
+							$("#connectionModal .modal").modal("hide");
+							$("#connectionModal").empty();
+							// $("#connection").fadeOut(setDisconnect);
+							new UploadButton();
+							$("#connection button").fadeOut(setDisconnect);
+						})
+						.fail(function(){
+							$("#connectionModal").find("button").prop("disabled", true);
+							$("#connectionModal .modal-body").prepend(
+								'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>Wrong username or password</p></div>'
+							);
+							$("#connectionModal").find("button").prop("disabled", false);
+						});
+					});
+					$("#connectionModal .modal").modal("show");
+				});
+			})});
+	};
+	isConnected ? setDisconnect() : setConnect();
+}
+
+function UploadButton() {
+	$("#upload").load("templates/uploadButton.html", function(){
+		$("#uploadModal").load("templates/uploadForm.html");
+		$("#uploadModal form").submit(function(){
+			$(this).ajaxSubmit();
+		});
+		$("#upload").click(function(){
+			$("#uploadModal .modal").modal("show");
+		});
+	});
 }

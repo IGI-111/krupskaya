@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Limelight);
 #player .slider .ui-slider-range
 {
 	background: green;
@@ -42,4 +43,9 @@
 	background: none;
 	z-index: 1;
 	pointer-events: none;
+}
+#krupskaya
+{
+	font-family: 'Limelight', cursive;
+	font-size: 25pt;
 }

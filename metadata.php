@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(!(isset($_SESSION['connected']) && $_SESSION['connected']))
-{
-	header('HTTP/1.0 403 Forbidden');
-	exit;
-}
+/* if(!(isset($_SESSION['connected']) && $_SESSION['connected'])) */
+/* { */
+/* 	header('HTTP/1.0 403 Forbidden'); */
+/* 	exit; */
+/* } */
 // assure that you get only numbers
-$id = filter_var($_GET['r'], FILTER_SANITIZE_NUMBER_INT);
+$id = filter_var($_GET['r'], FILTER_SANITIZE_STRING);
 $file = "data/$id.json";
 
 if(!file_exists($file)){

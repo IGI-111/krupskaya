@@ -20,7 +20,7 @@
 			}
 		</style>
 		<link rel="stylesheet" href="css/jquery-ui.min.css">
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.css">
 		<link rel="stylesheet" href="css/bootstrap-slider.css">
 		<link rel="stylesheet" href="css/main.css">
 
@@ -30,7 +30,7 @@
 		<!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -39,9 +39,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Krupskaya</a>
+					<a id="krupskaya" class="navbar-brand" href="#">Krupskaya</a>
 				</div>
-				<div id="connection" class="navbar-collapse collapse">
+				<div class="navbar-collapse collapse">
+					<div id="connection"></div>
+					<div id="connectionModal"></div>
+					<div id="upload"></div>
+					<div id="uploadModal"></div>
 				</div>
 			</div>
 		</nav>
