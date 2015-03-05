@@ -9,8 +9,16 @@ function process($id)
 	$document->wave = json_decode(file_get_contents("/tmp/$id.json"));
 	unlink("/tmp/$id.json");
 	unlink("/tmp/$id.wav");
+
 	//get mp3 metadata
-	$document->tag = (object) id3_get_tag("data/$id.mp3");
+	require_once('getid3/getid3.php');
+	$getID3 = new getID3;
+	$getid3->encoding = 'UTF-8';
+	// Analyze file and store returned data in $ThisFileInfo
+	$fileInfo = $getID3->analyze("data/$id.mp3");
+	getid3_lib::CopyTagsToComments($fileInfo);
+	$document->tags = $fileInfo['comments_html'];
+
 	//add it to the MongoDB
 	$m = new MongoClient();
 	$db = $m->krupskaya;
