@@ -1,4 +1,6 @@
 <?php
+require_once 'process.php';
+
 session_start();
 if(!(isset($_SESSION['connected']) && $_SESSION['connected']))
 {
@@ -31,7 +33,7 @@ if(isset($_FILES["f"]) && $_FILES["f"]["error"]== UPLOAD_ERR_OK)
 
 	if(move_uploaded_file($_FILES['f']['tmp_name'], $uploadDirectory.$filename ))
 	{
-		exit;
+		process($id);
 	}else{
 		header('HTTP/1.1 500 Internal Server Error');
 		die('error uploading File!');
