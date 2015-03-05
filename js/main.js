@@ -134,29 +134,41 @@ function setupUploadButton() {
 	$("#upload").click(function(){
 		$("#uploadModal").modal("show");
 	});
-	$("#uploadModal form").submit(function(){
+	$("#uploadModal form").submit(function(event){
 		$("#uploadModal :submit").prop("disabled", true);
+		event.preventDefault();
 		$.ajax({
 			url: 'upload.php',
 			type: 'POST',
-			xhr: function() {
-				var myXhr = $.ajaxSettings.xhr();
-				// if(myXhr.upload){ // Check if upload property exists
-				// 	myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
-				// }
-				return myXhr;
-			},
-			data: $("#uploadModal form").serialize(),
-			cache: false,
+			data: new FormData($("#uploadModal form")[0]),
 			contentType: false,
 			processData: false,
 			success: function(){
-				alert("yay");
+				$("#uploadModal").modal("hide");
+				$("#uploadModal :submit").prop("disabled", false);
 			},
-			error: function(){
-				alert("nay");
+			error: function(request){
+				var message;
+				switch(request.status)
+				{
+					case 401:
+						message = "You are not logged in.";
+						break;
+					case 422:
+						message = "File is too big.";
+						break;
+					case 400:
+						message = "File is not an mp3.";
+						break;
+					case 500:
+					default:
+						message = "Unknown Error.";
+				}
+				$("#uploadModal .modal-body").prepend(
+					'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
+				);
+				$("#uploadModal :submit").prop("disabled", false);
 			}
 		});
-		return false;
 	});
 }

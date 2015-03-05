@@ -54,7 +54,7 @@
 									<div class="modal-body">
 										<form action="upload.php" method="post" enctype="multipart/form-data">
 											<div class="form-group">
-												<input name="f" class="form-control" type="file">
+												<input name="f" class="form-control" type="file"/>
 											</div>
 											<button type="submit" class="btn btn-success">Upload</button>
 										</form>
