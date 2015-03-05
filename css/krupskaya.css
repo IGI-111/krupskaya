@@ -22,13 +22,22 @@
 	padding-right: 0.5%;
 	background: lightgrey;
 }
-#player canvas
+#simplePlayer .slider
 {
-	position: absolute;
-	height: 100%;
-	width: 99%;
+	margin-top: 9px;
+	border-radius: 0px;
+	border: 0px;
+	height: 10px;
+	width: 100%;
+	background: darkcyan;
 }
-#player .slider
+#simplePlayer .btn
+{
+	top:100px;
+	left:0px;
+	position: fixed;
+}
+#complexPlayer .slider
 {
 	position: absolute;
 	top: 5%;
@@ -36,8 +45,11 @@
 	width: 99%;
 	background: darkcyan;
 }
-#player canvas
+#player .sliderContainer canvas
 {
+	position: absolute;
+	height: 100%;
+	width: 99%;
 	padding-top:    5px;
 	padding-bottom: 5px;
 	background: none;

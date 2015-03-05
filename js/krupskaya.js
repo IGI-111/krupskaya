@@ -7,6 +7,31 @@ $(document).ready(function(){
 			$("#upload").show();
 	});
 	setupPlayer();
+
+	$.get("list.php", function(idList){
+		for (var i = 0, len = idList.length; i < len; i++) {
+			$.get("metadata.php",{r:idList[i]}, function(data) {
+				$("#list").append(
+				'<div class="col-md-2">' +
+					'<div class="panel panel-default" file="'+data.id+'">' +
+						'<div class="panel-heading">' +
+							data.tags.title[0] +
+						'</div>' +
+						'<div class="panel-body">' +
+							'<a href="#">' +
+								'<img class="media-object" src="data/'+data.id+'.jpg" alt="cover">' +
+							'</a>' +
+						'</div>' +
+					'</div>' +
+				'</div>');
+				setupList();
+			});
+		}
+	});
+
+});
+
+function setupList() {
 	$("#list .panel").click(function(){
 		changeTrack($(this).attr("file"));
 		$("#list .panel").removeClass("panel-danger");
@@ -16,9 +41,7 @@ $(document).ready(function(){
 		$(this).toggleClass("panel-warning");
 		$(this).toggleClass("panel-default");
 	});
-});
-
-
+}
 
 function setupPlayer() {
 	var audio = $("#player audio")[0];
@@ -32,6 +55,10 @@ function setupPlayer() {
 	$("#player .stopButton").on("click", function(){
 		audio.pause();
 		audio.currentTime = 0;
+	});
+	$("#player .togglePlayer").on("click", function(){
+		$("#complexPlayer").toggle("blind");
+		$("#simplePlayer").toggle("blind");
 	});
 	$("#player .slider").slider({
 		max: sliderPrecision,
@@ -53,7 +80,7 @@ function changeTrack (id){
 	$("#player .slider").slider("value", 0);
 	// change waveform data
 	$.get("metadata.php",{r:id}, function(data) {
-		drawWaveform(data);
+		drawWaveform(data.wave);
 	});
 	// autoplay
 	$("#player audio")[0].play();

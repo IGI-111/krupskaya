@@ -22,7 +22,7 @@
 		<link rel="stylesheet" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.css">
 		<link rel="stylesheet" href="css/bootstrap-slider.css">
-		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/krupskaya.css">
 
 		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	</head>
@@ -41,7 +41,7 @@
 					</button>
 					<a id="krupskaya" class="navbar-brand" href="#">Krupskaya</a>
 				</div>
-				<nav class="navbar-collapse collapse">
+				<div class="navbar-collapse collapse">
 					<div class="nav navbar-nav navbar-right">
 						<button id="upload" style="display: none;" class="glyphicon glyphicon-upload navbar-btn btn-success btn"></button>
 						<div id="uploadModal" class="modal fade">
@@ -86,57 +86,45 @@
 							</div>
 						</div>
 					</div>
-				</nav>
+				</div>
 			</div>
 		</nav>
-
-		<!-- Main jumbotron for a primary marketing message or call to action -->
-		<div class="well">
-			<div id="player" class="container">
-				<audio hidden src="">
-				</audio>
-				<div class="sliderContainer">
+		<section>
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div id="player">
+				<div id="simplePlayer" style="display:none;">
+						<button class="glyphicon glyphicon-play btn btn-success playButton"></button>
+						<button class="glyphicon glyphicon-pause btn btn-info pauseButton"></button>
+						<button class="glyphicon glyphicon-stop btn btn-danger stopButton"></button>
+						<button class="glyphicon glyphicon-arrow-up btn btn-default togglePlayer"></button>
 					<div class="slider">
 					</div>
-					<canvas></canvas>
 				</div>
-				<br/>
-				<a class="glyphicon glyphicon-play btn btn-success playButton"></a>
-				<a class="glyphicon glyphicon-pause btn btn-info pauseButton"></a>
-				<a class="glyphicon glyphicon-stop btn btn-danger stopButton"></a>
-			</div>
-		</div>
-
-		<div id="list" class="container">
-			<div class="col-md-2">
-				<div class="panel panel-default" file="01">
-					<div class="panel-heading">
-						Hell March
-					</div>
-					<div class="panel-body">
-						<a href="#">
-							<img class="media-object" src="data/01.jpg" alt="cover">
-						</a>
+				<div id="complexPlayer" class="well">
+					<div class="container">
+						<audio hidden src="">
+						</audio>
+						<div class="sliderContainer">
+							<div class="slider">
+							</div>
+							<canvas></canvas>
+						</div>
+						<br/>
+						<button class="glyphicon glyphicon-play btn btn-success playButton"></button>
+						<button class="glyphicon glyphicon-pause btn btn-info pauseButton"></button>
+						<button class="glyphicon glyphicon-stop btn btn-danger stopButton"></button>
+						<button class="glyphicon glyphicon-arrow-up btn btn-default togglePlayer"></button>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<div class="panel panel-default" file="02">
-					<div class="panel-heading">
-						The Sign of the Southern Cross
-					</div>
-					<div class="panel-body">
-						<a href="#">
-							test link
-						</a>
-					</div>
-				</div>
-			</div>
-		</div> <!-- /container -->
+			<br>
+			<div id="list" class="container">
+			</div> <!-- /container -->
+		</section>
 		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 <script>window.jQuery.ui || document.write('<script src="js/vendor/jquery-ui.min.js"><\/script>')</script>
 <script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/krupskaya.js"></script>
 </body>
 </html>
