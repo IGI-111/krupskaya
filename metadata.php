@@ -5,7 +5,7 @@ $id = filter_var($_GET['r'], FILTER_SANITIZE_STRING);
 $m = new MongoClient();
 $db = $m->krupskaya;
 $collection = $db->songs;
-$query = array('id' => $id);
+$query = array('_id' => $id);
 $result = $collection->findOne($query);
 
 if($result == NULL){

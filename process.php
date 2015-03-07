@@ -2,7 +2,7 @@
 function process($id)
 {
 	//the file has just been moved into data
-	$document->id = $id;
+	$document->_id = $id;
 	//convert it to wav and process wav2json
 	system("sox data/$id.mp3 -c 2 -t wav /tmp/$id.wav");
 	system("wav2json /tmp/$id.wav -o /tmp/$id.json 2> /dev/null");

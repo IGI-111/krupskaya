@@ -13,13 +13,13 @@ $(document).ready(function(){
 			$.get("metadata.php",{r:idList[i]}, function(data) {
 				$("#list").append(
 				'<div class="col-md-2">' +
-					'<div class="panel panel-default" file="'+data.id+'">' +
+					'<div class="panel panel-default" file="'+data._id+'">' +
 						'<div class="panel-heading">' +
 							data.title +
 						'</div>' +
 						'<div class="panel-body">' +
 							'<a href="#">' +
-								'<img class="media-object" src="data/'+data.id+'.jpg" alt="cover">' +
+								'<img class="media-object" src="data/'+data._id+'.jpg" alt="cover">' +
 							'</a>' +
 						'</div>' +
 					'</div>' +

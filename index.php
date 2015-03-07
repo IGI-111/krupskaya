@@ -100,7 +100,12 @@
 			<div id="player">
 				<audio hidden src=""></audio>
 				<div id="simplePlayer" style="display:none;">
-						<button class="glyphicon glyphicon-arrow-down btn btn-default togglePlayer"></button>
+					<div class="buttons">
+						<button class="glyphicon glyphicon-play btn btn-success playButton btn-xs"></button>
+						<button class="glyphicon glyphicon-pause btn btn-info pauseButton btn-xs"></button>
+						<button class="glyphicon glyphicon-stop btn btn-danger stopButton btn-xs"></button>
+						<button class="glyphicon glyphicon-arrow-down btn btn-default btn-xs togglePlayer"></button>
+					</div>
 					<div class="slider">
 					</div>
 				</div>
