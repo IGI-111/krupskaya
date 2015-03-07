@@ -33,7 +33,7 @@
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -41,69 +41,71 @@
 					</button>
 					<a id="krupskaya" class="navbar-brand" href="#">Krupskaya</a>
 				</div>
-				<div class="navbar-collapse collapse">
-					<div class="nav navbar-nav navbar-right">
-						<button id="upload" style="display: none;" class="glyphicon glyphicon-upload navbar-btn btn-success btn"></button>
-						<div id="uploadModal" class="modal fade">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title">Upload file</h4>
-									</div>
-									<div class="modal-body">
-										<form action="upload.php" method="post" enctype="multipart/form-data">
-											<div class="form-group">
-												<input name="f" class="form-control" type="file"/>
-											</div>
-											<button type="submit" class="btn btn-success">Upload</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-						<button id="connect" style="display: none;" class="glyphicon glyphicon-log-in navbar-btn btn-success btn"></button>
-						<button id="disconnect" style="display: none;" href="disconnect.php" class="glyphicon glyphicon-log-out navbar-btn btn-info btn"></button>
-						<div id="connectionModal" class="modal fade">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title">Sign In</h4>
-									</div>
-									<div class="modal-body">
-										<form action="connect.php" method="post">
-											<div class="form-group">
-												<input name="login" placeholder="Login" class="form-control" type="text">
-											</div>
-											<div class="form-group">
-												<input name="password" placeholder="Password" class="form-control" type="password">
-											</div>
-											<button type="submit" class="btn btn-success">Sign in</button>
-										</form>
+				<div class="navbar-collapse collapse" id="bs-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" id="upload" style="display: none;">Upload</a>
+							<div id="uploadModal" class="modal fade">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title">Upload file</h4>
+										</div>
+										<div class="modal-body">
+											<form action="upload.php" method="post" enctype="multipart/form-data">
+												<div class="form-group">
+													<span class="btn btn-primary btn-file">
+														Browse&hellip; <input multiple="multiple" id="uploadFileInput" name="f[]" class="form-control" type="file"/>
+													</span>
+												</div>
+													<button type="submit" class="btn btn-success">Upload</button>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
+						</li>
+						<li>
+							<a href="#" id="connect" style="display: none;">Connect</a>
+							<a href="#" id="disconnect" style="display: none;" href="disconnect.php">Disconnect</a>
+							<div id="connectionModal" class="modal fade">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title">Sign In</h4>
+										</div>
+										<div class="modal-body">
+											<form action="connect.php" method="post">
+												<div class="form-group">
+													<input name="login" placeholder="Login" class="form-control" type="text">
+												</div>
+												<div class="form-group">
+													<input name="password" placeholder="Password" class="form-control" type="password">
+												</div>
+												<button type="submit" class="btn btn-success">Sign in</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</nav>
 		<section>
 			<!-- Main jumbotron for a primary marketing message or call to action -->
 			<div id="player">
+				<audio hidden src=""></audio>
 				<div id="simplePlayer" style="display:none;">
-						<button class="glyphicon glyphicon-play btn btn-success playButton"></button>
-						<button class="glyphicon glyphicon-pause btn btn-info pauseButton"></button>
-						<button class="glyphicon glyphicon-stop btn btn-danger stopButton"></button>
-						<button class="glyphicon glyphicon-arrow-up btn btn-default togglePlayer"></button>
+						<button class="glyphicon glyphicon-arrow-down btn btn-default togglePlayer"></button>
 					<div class="slider">
 					</div>
 				</div>
 				<div id="complexPlayer" class="well">
 					<div class="container">
-						<audio hidden src="">
-						</audio>
 						<div class="sliderContainer">
 							<div class="slider">
 							</div>

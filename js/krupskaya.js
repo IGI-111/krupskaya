@@ -15,7 +15,7 @@ $(document).ready(function(){
 				'<div class="col-md-2">' +
 					'<div class="panel panel-default" file="'+data.id+'">' +
 						'<div class="panel-heading">' +
-							data.tags.title[0] +
+							data.title +
 						'</div>' +
 						'<div class="panel-body">' +
 							'<a href="#">' +

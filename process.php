@@ -17,7 +17,9 @@ function process($id)
 	// Analyze file and store returned data in $ThisFileInfo
 	$fileInfo = $getID3->analyze("data/$id.mp3");
 	getid3_lib::CopyTagsToComments($fileInfo);
-	$document->tags = $fileInfo['comments_html'];
+	$document->album = $fileInfo['comments_html']['album'][0];
+	$document->artist = $fileInfo['comments_html']['artist'][0];
+	$document->title = $fileInfo['comments_html']['title'][0];
 
 	//add it to the MongoDB
 	$m = new MongoClient();
