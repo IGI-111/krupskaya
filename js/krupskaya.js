@@ -9,8 +9,9 @@ $(document).ready(function(){
 	setupPlayer();
 
 	$.get("list.php", function(idList){
+		var requests = [];
 		for (var i = 0, len = idList.length; i < len; i++) {
-			$.get("metadata.php",{r:idList[i]}, function(data) {
+			requests.push($.get("metadata.php",{r:idList[i]}, function(data) {
 				$("#list").append(
 				'<div class="col-md-2">' +
 					'<div class="panel panel-default" file="'+data._id+'">' +
@@ -24,9 +25,13 @@ $(document).ready(function(){
 						'</div>' +
 					'</div>' +
 				'</div>');
-				setupList();
-			});
+			}));
 		}
+		$("#list").css("background: loading.gif");
+		$.when(requests, function(){
+			$("#list").css("background: none");
+			setupList();
+		});
 	});
 
 });
