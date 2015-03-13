@@ -27,9 +27,10 @@ $(document).ready(function(){
 				'</div>');
 			}));
 		}
-		$("#list").css("background: loading.gif");
-		$.when(requests, function(){
-			$("#list").css("background: none");
+		$("#list").toggleClass("loading glyphicon glyphicon-refresh");
+
+		$.when.apply($, requests).then(function(){
+		$("#list").toggleClass("loading glyphicon glyphicon-refresh");
 			setupList();
 		});
 	});
