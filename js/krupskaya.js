@@ -27,7 +27,6 @@ $(document).ready(function(){
 				'</div>');
 			}));
 		}
-		$("#list loading").show();
 		$.when.apply($, requests).then(function(){
 			$("#list loading").fadeOut();
 			setupList();
