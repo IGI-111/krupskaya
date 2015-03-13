@@ -5,18 +5,19 @@ $(document).ready(function(){
 		setupUploadButton();
 		if(isConnected)
 			$("#upload").show();
-	});
+	}idListidList);
 	setupPlayer();
 
-	$.get("list.php", function(idList){
+
+	$.get("listAlbums.php", function(albumList){
 		var requests = [];
-		for (var i = 0, len = idList.length; i < len; i++) {
-			requests.push($.get("metadata.php",{r:idList[i]}, function(data) {
-				$("#list").append(
+		for (var i = 0, len = albumList.length; i < len; i++) {
+			requests.push($.get("album.php",{r:albumList[i]}, function(data) {
+				$("#list").add("div").addClass("col-md-2")
 				'<div class="col-md-2">' +
-					'<div style="display:none;" class="panel panel-default" file="'+data._id+'">' +
+					'<div style="display:none;" class="panel panel-default">' +
 						'<div class="panel-heading">' +
-							data.title +
+							albumList[i] +
 						'</div>' +
 						'<div class="panel-body">' +
 							'<a href="#">' +
