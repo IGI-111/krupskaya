@@ -14,7 +14,7 @@ $(document).ready(function(){
 			requests.push($.get("metadata.php",{r:idList[i]}, function(data) {
 				$("#list").append(
 				'<div class="col-md-2">' +
-					'<div class="panel panel-default" file="'+data._id+'">' +
+					'<div style="display:none;" class="panel panel-default" file="'+data._id+'">' +
 						'<div class="panel-heading">' +
 							data.title +
 						'</div>' +
@@ -28,8 +28,8 @@ $(document).ready(function(){
 			}));
 		}
 		$.when.apply($, requests).then(function(){
-			$("#list loading").fadeOut();
 			setupList();
+			$("#list panel").fadeIn();
 		});
 	});
 

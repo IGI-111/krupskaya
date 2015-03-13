@@ -126,8 +126,7 @@
 			</div>
 			<br>
 			<div id="list" class="container">
-				<span class="glyphicon glyphicon-refresh loading"></span>
-			</div> <!-- /container -->
+			</div>
 		</section>
 		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
