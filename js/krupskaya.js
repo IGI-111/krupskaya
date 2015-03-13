@@ -29,7 +29,7 @@ $(document).ready(function(){
 		}
 		$.when.apply($, requests).then(function(){
 			setupList();
-			$("#list panel").fadeIn();
+			$("#list .panel").fadeIn();
 		});
 	});
 
