@@ -126,6 +126,7 @@
 			</div>
 			<br>
 			<div id="list" class="container">
+				<span style="display:none;" class="glyphicon glyphicon-refresh loading"></span>
 			</div> <!-- /container -->
 		</section>
 		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->

@@ -27,18 +27,14 @@ $(document).ready(function(){
 				'</div>');
 			}));
 		}
-		toggleLoading($("#list"));
+		$("#list loading").show();
 		$.when.apply($, requests).then(function(){
-			toggleLoading($("#list"));
+			$("#list loading").fadeOut();
 			setupList();
 		});
 	});
 
 });
-
-function toggleLoading(object) {
-	object.toggleClass("glyphicon").toggleClass("glyphicon-refresh").toggleClass("loading");
-}
 
 function setupList() {
 	$("#list .panel").click(function(){
