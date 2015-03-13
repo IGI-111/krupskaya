@@ -27,15 +27,18 @@ $(document).ready(function(){
 				'</div>');
 			}));
 		}
-		$("#list").toggleClass("loading glyphicon glyphicon-refresh");
-
+		toggleLoading($("#list"));
 		$.when.apply($, requests).then(function(){
-		$("#list").toggleClass("loading glyphicon glyphicon-refresh");
+			toggleLoading($("#list"));
 			setupList();
 		});
 	});
 
 });
+
+function toggleLoading(object) {
+	object.toggleClass("glyphicon").toggleClass("glyphicon-refresh").toggleClass("loading");
+}
 
 function setupList() {
 	$("#list .panel").click(function(){

@@ -68,7 +68,7 @@
 }
 .btn-file input[type=file]
 {
-cposition: absolute;
+	position: absolute;
 	top: 0;
 	right: 0;
 	min-width: 100%;
@@ -81,7 +81,7 @@ cposition: absolute;
 	cursor: inherit;
 	display: block;
 }
-input[rcadonly]
+input[readonly]
 {
 	background-color: white !important;
 	cursor: text !important;
