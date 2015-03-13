@@ -5,46 +5,47 @@ $(document).ready(function(){
 		setupUploadButton();
 		if(isConnected)
 			$("#upload").show();
-	}idListidList);
+	});
 	setupPlayer();
+	setupList();
+});
 
-
+function setupList() {
+	$("#list").empty();
 	$.get("listAlbums.php", function(albumList){
 		var requests = [];
 		for (var i = 0, len = albumList.length; i < len; i++) {
 			requests.push($.get("album.php",{r:albumList[i]}, function(data) {
-				$("#list").add("div").addClass("col-md-2")
-				'<div class="col-md-2">' +
-					'<div style="display:none;" class="panel panel-default">' +
-						'<div class="panel-heading">' +
-							albumList[i] +
+				var albumHtml =
+					'<div class="col-md-2">' +
+						'<div style="display:none;" class="panel panel-default">' +
+							'<div class="panel-heading">' +
+								data[0].album +
+							'</div>' +
+							'<ul class="list-group">';
+				for (var i = 0, len = data.length; i < len; i++) {
+					albumHtml +=
+								'<li class="list-group-item" data-file="' + data[i]._id + '" href="#">' +
+									data[i].title +
+								'</li>';
+				}
+				albumHtml +=
+							'</ul>' +
 						'</div>' +
-						'<div class="panel-body">' +
-							'<a href="#">' +
-								'<img class="media-object" src="data/'+data._id+'.jpg" alt="cover">' +
-							'</a>' +
-						'</div>' +
-					'</div>' +
-				'</div>');
+					'</div>';
+				$("#list").append(albumHtml);
 			}));
 		}
 		$.when.apply($, requests).then(function(){
-			setupList();
+			$("#list li").click(function(){
+				$("#list .panel-primary").toggleClass("panel-primary");
+				$('#list .active').toggleClass("active");
+				changeTrack($(this).attr("data-file"));
+				$(this).toggleClass("active");
+				$(this).parent().parent().toggleClass("panel-primary");
+			});
 			$("#list .panel").fadeIn();
 		});
-	});
-
-});
-
-function setupList() {
-	$("#list .panel").click(function(){
-		changeTrack($(this).attr("file"));
-		$("#list .panel").removeClass("panel-danger");
-		$(this).toggleClass("panel-danger");
-	});
-	$("#list .panel").hover(function(){
-		$(this).toggleClass("panel-warning");
-		$(this).toggleClass("panel-default");
 	});
 }
 
@@ -65,19 +66,30 @@ function setupPlayer() {
 		$("#complexPlayer").toggle("blind");
 		$("#simplePlayer").toggle("blind");
 	});
-	$("#player .slider").slider({
-		max: sliderPrecision,
-		orientation: "horizontal",
-		range: "min",
-		animate: 1000
-	});
-	$("#player .slider").on("slide", function(event, ui) {
-		audio.currentTime = audio.duration*(ui.value / sliderPrecision);
-	});
-	$("#player audio").on("timeupdate", function(event, ui){
-		var pos = sliderPrecision*(audio.currentTime / audio.duration);
-		$("#player .slider").slider("value", pos);
-	});
+	$("#player .slider")
+		.slider({
+			max: sliderPrecision,
+			orientation: "horizontal",
+			range: "min",
+			animate: 1000
+		})
+		.on("slide", function(event, ui) {
+			audio.currentTime = audio.duration*(ui.value / sliderPrecision);
+		});
+	$("#player audio")
+		.on("timeupdate", function(event, ui){
+			var pos = sliderPrecision*(audio.currentTime / audio.duration);
+			$("#player .slider").slider("value", pos);
+		})
+		.on("ended", function(event, ui){
+			//play next element if there is any
+			var nextToPlay = $("#list .active").next();
+			if(nextToPlay != undefined){
+				$('#list .active').toggleClass("active");
+				changeTrack(nextToPlay.attr("data-file"));
+				nextToPlay.toggleClass("active");
+			}
+		});
 }
 function changeTrack (id){
 	// change audio value
@@ -137,12 +149,12 @@ function setupConnectButton(isConnected) {
 		$.post("connect.php", $("#connectionModal form").serialize())
 		.done(function(){
 			$("#connectionModal").modal("hide");
-			$("#connectionModal :submit").prop("disabled", false);
 			toggleConnection();
 		}).fail(function(){
 			$("#connectionModal .modal-body").prepend(
 				'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>Wrong username or password</p></div>'
 			);
+		}).complete(function(){
 			$("#connectionModal :submit").prop("disabled", false);
 		});
 	});
@@ -177,7 +189,6 @@ function setupUploadButton() {
 			processData: false,
 			success: function(){
 				$("#uploadModal").modal("hide");
-				$("#uploadModal :submit").prop("disabled", false);
 			},
 			error: function(request){
 				var message;
@@ -190,8 +201,6 @@ function setupUploadButton() {
 						message = "File is too big.";
 						break;
 					case 400:
-						message = "File is not an mp3.";
-						break;
 					case 500:
 					default:
 						message = "Unknown Error.";
@@ -199,6 +208,8 @@ function setupUploadButton() {
 				$("#uploadModal .modal-body").prepend(
 					'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
 				);
+			},
+			complete: function() {
 				$("#uploadModal :submit").prop("disabled", false);
 			}
 		});

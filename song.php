@@ -3,8 +3,8 @@ session_start();
 
 // assure that you get only numbers
 $id = filter_var($_GET['r'], FILTER_SANITIZE_STRING);
-$extension = "mp3";
-$mime_type = "audio/mpeg";
+$extension = "ogg";
+$mime_type = "audio/ogg";
 $filename = "$id.$extension";
 $file = "data/$filename";
 

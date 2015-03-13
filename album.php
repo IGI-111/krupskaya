@@ -5,7 +5,7 @@ $album = filter_var($_GET['r'], FILTER_SANITIZE_STRING);
 $m = new MongoClient();
 $db = $m->krupskaya;
 $collection = $db->songs;
-$query = array('album' => $album);
+$query = array('$query' => array('album' => $album), '$orderby' => array('track' => 1));
 $cursor = $collection->find($query);
 
 if($cursor == NULL){

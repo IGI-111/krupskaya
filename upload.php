@@ -26,20 +26,19 @@ foreach ($_FILES['f']['name'] as $f => $name){
 
 		//allowed file type Server side check
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		if(strtolower($_FILES['f']['type'][$f]) != 'audio/mpeg' ||
-			finfo_file($finfo, $_FILES['f']['tmp_name'][$f]) != 'audio/mpeg')
-		{
-			header('HTTP/1.1 400 Bad Request');
-			die('Unsupported File!'); //output error
-		}
+		/* if(strtolower($_FILES['f']['type'][$f]) != 'audio/mpeg' || */
+		/* 	finfo_file($finfo, $_FILES['f']['tmp_name'][$f]) != 'audio/mpeg') */
+		/* { */
+		/* 	header('HTTP/1.1 400 Bad Request'); */
+		/* 	die('Unsupported File!'); //output error */
+		/* } */
 
-		$extension = 'mp3';
 		$id        = uniqid();
-		$filename  = "$id.$extension"; //new file name
+		$originalFilename = $_FILES['f']['name'][$f];
 
-		if(move_uploaded_file($_FILES['f']['tmp_name'][$f], $uploadDirectory.$filename ))
+		if(move_uploaded_file($_FILES['f']['tmp_name'][$f], '/tmp/'.$originalFilename))
 		{
-			process($id);
+			process($originalFilename, $uploadDirectory, $id);
 		}else{
 			header('HTTP/1.1 500 Internal Server Error');
 			die('error uploading File!');
@@ -52,3 +51,4 @@ foreach ($_FILES['f']['name'] as $f => $name){
 		die('Something wrong with upload! Is "upload_max_filesize" set correctly?');
 	}
 }
+
