@@ -1,17 +1,10 @@
 var Connection = {
 	status: undefined,
 	toggle: function(){
-		$("#upload").toggle('fade');
-		if(this.status){
-			$("#disconnect").hide('fade', 200, function(){
-				$("#connect").show('fade', 200);
-			});
-		}
-		else{
-			$("#connect").hide('fade', 200, function(){
-				$("#disconnect").show('fade', 200);
-			});
-		}
+		$("#upload").toggle();
+		$("#register").toggle();
+		$("#connect").toggle();
+		$("#disconnect").toggle();
 		this.status = !this.status;
 	},
 	bindUI: function() {
@@ -67,9 +60,8 @@ var Connection = {
 						case 422:
 							message = "File is too big.";
 						break;
-						case 400:
-							case 500:
-							default:
+						case 500:
+						default:
 							message = "Unknown Error.";
 					}
 					$("#uploadModal .modal-body").prepend(
@@ -81,21 +73,70 @@ var Connection = {
 				}
 			});
 		});
-
+		//setup register button
+		$("#register").click(function(){
+			$("#registerModal").modal("show");
+		});
+		$("#registerModal form").submit(function(event){
+			$("#registerModal :submit").prop("disabled", true);
+			event.preventDefault();
+				$.ajax({
+					url: 'register.php',
+					type: 'POST',
+					data: $("#registerModal form").serialize(),
+					success: function(){
+						$("#registerModal").modal("hide");
+					},
+					error: function(request){
+						var message;
+						switch(request.status)
+						{
+							case 422:
+								message = "Username is already taken.";
+								break;
+							case 500:
+							default:
+								message = "Unknown Error.";
+						}
+						$("#registerModal .modal-body").prepend(
+							'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
+						);
+					},
+					complete: function() {
+						$("#registerModal :submit").prop("disabled", false);
+					}
+				});
+		});
+		$("#registerModal input[type='password']").keyup(function(){
+			var validated = true;
+			var value = undefined;
+			$("#registerModal input[type='password']").each(function(index){
+				if(index == 0)
+					value = $(this).val();
+				else if($(this).val() != value)
+					validated = false;
+			});
+			if(!validated){
+				$("#registerModal input[type='password']").css("color", "red");
+				$("#registerModal :submit").prop("disabled", true);
+			}else{
+				$("#registerModal input[type='password']").css("color", "green");
+				$("#registerModal :submit").prop("disabled", false);
+			}
+		});
 	},
 	init: function(){
 		Connection.bindUI();
 		$.get("connected.php", function(isConnected) {
 			this.status = isConnected;
-			if(this.status)
-				{
-					$("#upload").show();
-					$("#disconnect").show();
-				}
-				else
-					{
-						$("#connect").show();
-					}
+			if(this.status){
+				$("#upload").show();
+				$("#disconnect").show();
+			}
+			else{
+				$("#register").show();
+				$("#connect").show();
+			}
 		});
 	}
 };

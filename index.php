@@ -44,7 +44,7 @@
 				<div class="navbar-collapse collapse" id="bs-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#" id="upload" style="display: none;">Upload</a>
+							<button href="#" id="upload" class="btn btn-link navbar-btn" style="display: none;">Upload</button>
 							<div id="uploadModal" class="modal fade">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -67,8 +67,43 @@
 							</div>
 						</li>
 						<li>
-							<a href="#" id="connect" style="display: none;">Connect</a>
-							<a href="#" id="disconnect" style="display: none;" href="disconnect.php">Disconnect</a>
+							<button href="#" id="register" class="btn btn-link navbar-btn" style="display: none;">Register</button>
+							<div id="registerModal" class="modal fade">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title">Register</h4>
+										</div>
+										<div class="modal-body">
+											<form class="form-horizontal" action="register.php" method="post">
+												<div class="form-group">
+													<div class="col-xs-12">
+														<input placeholder="Username" name="username" class="form-control" type="textfield"/>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-6">
+														<input placeholder="Password" value="" name="password" class="form-control" type="password"/>
+													</div>
+													<div class="col-xs-6">
+														<input placeholder="Repeat" value="" class="form-control" type="password"/>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-10 coll-offset-2">
+														<button type="submit" class="btn btn-success">Upload</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<button href="#" class="btn btn-link navbar-btn" id="connect" style="display: none;">Connect</button>
+							<button href="#" class="btn btn-link navbar-btn" id="disconnect" style="display: none;" href="disconnect.php">Disconnect</button>
 							<div id="connectionModal" class="modal fade">
 								<div class="modal-dialog">
 									<div class="modal-content">

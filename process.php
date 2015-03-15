@@ -6,6 +6,7 @@ function process($originalFilename, $uploadDirectory, $id)
 	system('sox '.escapeshellarg("/tmp/$originalFilename").' '.$uploadDirectory.$id.'.ogg');
 	//the file has just been copied into data
 	$document['_id'] = $id;
+	$document['username'] = $_SESSION['username'];
 	//convert it to wav and process wav2json
 	system("sox data/$id.ogg -c 2 -t wav /tmp/$id.wav");
 	system("wav2json /tmp/$id.wav -o /tmp/$id.json 2> /dev/null");
@@ -25,7 +26,7 @@ function process($originalFilename, $uploadDirectory, $id)
 		if($nameInDocument == null)
 			$nameInDocument = $tagName;
 		if(array_key_exists($tagName, $fileInfo['comments_html']))
-			$document[$nameInDocument] = $fileInfo['comments_html'][$tagName][0];
+			$document[$nameInDocument] = (string)$fileInfo['comments_html'][$tagName][0];
 	};
 
 	$addTagIfExists($fileInfo, $document, 'title');
