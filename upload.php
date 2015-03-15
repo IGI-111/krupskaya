@@ -1,6 +1,7 @@
 <?php
 require_once 'process.php';
 
+if (ob_get_level() == 0) ob_start();
 session_start();
 if(!(isset($_SESSION['connected']) && $_SESSION['connected']))
 {
@@ -38,6 +39,10 @@ foreach ($_FILES['f']['name'] as $f => $name){
 
 		if(move_uploaded_file($_FILES['f']['tmp_name'][$f], '/tmp/'.$originalFilename))
 		{
+			header('Content-Type: text/plain');
+			echo "Processing...";
+			ob_flush();
+			flush();
 			process($originalFilename, $uploadDirectory, $id);
 		}else{
 			header('HTTP/1.1 500 Internal Server Error');

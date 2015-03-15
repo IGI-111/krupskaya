@@ -55,11 +55,19 @@
 										<div class="modal-body">
 											<form action="upload.php" method="post" enctype="multipart/form-data">
 												<div class="form-group">
-													<span class="btn btn-primary btn-file">
-														Browse&hellip; <input multiple="multiple" id="uploadFileInput" name="f[]" class="form-control" type="file"/>
-													</span>
+													<div class="input-group">
+														<span class="input-group-btn">
+															<span class="btn btn-primary btn-file">
+																Browse&hellip; <input multiple="multiple" id="uploadFileInput" name="f[]" class="form-control" type="file"/>
+															</span>
+														</span>
+														<input type="text" class="form-control" id="uploadFileLabel" readonly>
+													</div>
+													<div class="progress" style="display: none;">
+														<div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+													</div>
 												</div>
-													<button type="submit" class="btn btn-success">Upload</button>
+												<button type="submit" class="btn btn-success">Upload</button>
 											</form>
 										</div>
 									</div>

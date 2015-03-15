@@ -37,10 +37,35 @@ var Connection = {
 		$("#upload").click(function(){
 			$("#uploadModal").modal("show");
 		});
+		$('#uploadFileInput').change(function() {
+				var input = $(this);
+				var numFiles = input.get(0).files ? input.get(0).files.length : 1;
+				var label = input.val();
+			$('#uploadFileLabel').val(numFiles > 1 ? numFiles + ' files' : label);
+		});
 		$("#uploadModal form").submit(function(event){
 			$("#uploadModal :submit").prop("disabled", true);
 			event.preventDefault();
+			$("#uploadModal .progress").fadeIn();
 			$.ajax({
+				xhr: function() {
+					var xhr2 = $.ajaxSettings.xhr();
+					if(xhr2.upload){
+						xhr2.upload.addEventListener('progress',function(event){
+							if(event.lengthComputable){
+								var progress = Math.round(100*(event.loaded/event.total));
+								$('#uploadModal .progress-bar').css("width", progress+"%");
+							}
+						}, false);
+					}
+					xhr2.addEventListener('readystatechange', function(e) {
+						if(xhr2.readyState === 2) {
+							$('#uploadModal .progress-bar').text("Processing")
+							$("#uploadModal .progress").addClass("progress-striped").addClass("active");
+						}
+					});
+					return xhr2;
+				},
 				url: 'upload.php',
 				type: 'POST',
 				data: new FormData($("#uploadModal form")[0]),
@@ -61,7 +86,7 @@ var Connection = {
 							message = "File is too big.";
 						break;
 						case 500:
-						default:
+							default:
 							message = "Unknown Error.";
 					}
 					$("#uploadModal .modal-body").prepend(
@@ -70,6 +95,8 @@ var Connection = {
 				},
 				complete: function() {
 					$("#uploadModal :submit").prop("disabled", false);
+					$("#uploadModal .progress").hide().removeClass("progress-striped").removeClass("active");
+					$('#uploadModal .progress-bar').css("width", "0%").text("");
 				}
 			});
 		});
@@ -80,32 +107,32 @@ var Connection = {
 		$("#registerModal form").submit(function(event){
 			$("#registerModal :submit").prop("disabled", true);
 			event.preventDefault();
-				$.ajax({
-					url: 'register.php',
-					type: 'POST',
-					data: $("#registerModal form").serialize(),
-					success: function(){
-						$("#registerModal").modal("hide");
-					},
-					error: function(request){
-						var message;
-						switch(request.status)
-						{
-							case 422:
-								message = "Username is already taken.";
-								break;
-							case 500:
+			$.ajax({
+				url: 'register.php',
+				type: 'POST',
+				data: $("#registerModal form").serialize(),
+				success: function(){
+					$("#registerModal").modal("hide");
+				},
+				error: function(request){
+					var message;
+					switch(request.status)
+					{
+						case 422:
+							message = "Username is already taken.";
+						break;
+						case 500:
 							default:
-								message = "Unknown Error.";
-						}
-						$("#registerModal .modal-body").prepend(
-							'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
-						);
-					},
-					complete: function() {
-						$("#registerModal :submit").prop("disabled", false);
+							message = "Unknown Error.";
 					}
-				});
+					$("#registerModal .modal-body").prepend(
+						'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
+					);
+				},
+				complete: function() {
+					$("#registerModal :submit").prop("disabled", false);
+				}
+			});
 		});
 		$("#registerModal input[type='password']").keyup(function(){
 			var validated = true;
