@@ -1,17 +1,18 @@
 var Connection = {
-	status: false,
+	status: undefined,
 	toggle: function(){
-		if(status){
-			$("#disconnect").toggle('fade', function(){
-				$("#connect").toggle('fade');
+		$("#upload").toggle('fade');
+		if(this.status){
+			$("#disconnect").hide('fade', 200, function(){
+				$("#connect").show('fade', 200);
 			});
 		}
 		else{
-			$("#connect").toggle('fade', function(){
-				$("#disconnect").toggle('fade');
+			$("#connect").hide('fade', 200, function(){
+				$("#disconnect").show('fade', 200);
 			});
-			$("#upload").toggle('fade');
 		}
+		this.status = !this.status;
 	},
 	bindUI: function() {
 		// setup connection buttons
@@ -85,7 +86,7 @@ var Connection = {
 	init: function(){
 		Connection.bindUI();
 		$.get("connected.php", function(isConnected) {
-			status = isConnected;
+			this.status = isConnected;
 			if(status)
 				{
 					$("#upload").show();
