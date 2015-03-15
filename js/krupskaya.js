@@ -87,7 +87,7 @@ var Connection = {
 		Connection.bindUI();
 		$.get("connected.php", function(isConnected) {
 			this.status = isConnected;
-			if(status)
+			if(this.status)
 				{
 					$("#upload").show();
 					$("#disconnect").show();
