@@ -2,6 +2,7 @@
 require_once 'process.php';
 
 if (ob_get_level() == 0) ob_start();
+header("X-Accel-Buffering: no");
 session_start();
 if(!(isset($_SESSION['connected']) && $_SESSION['connected']))
 {
@@ -39,8 +40,8 @@ foreach ($_FILES['f']['name'] as $f => $name){
 
 		if(move_uploaded_file($_FILES['f']['tmp_name'][$f], '/tmp/'.$originalFilename))
 		{
-			header('Content-Type: text/plain');
-			echo "Processing...";
+			header('Content-Encoding: none;');
+			echo "Processing";
 			ob_flush();
 			flush();
 			process($originalFilename, $uploadDirectory, $id);
