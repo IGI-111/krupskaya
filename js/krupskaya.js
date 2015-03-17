@@ -31,7 +31,7 @@ var Connection = {
 						$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
 							$("<span>").attr("aria-hidden", "true").text("&times;")
 						),
-						$("<p>").text("Wrong username or password");
+						$("<p>").text("Wrong username or password")
 					)
 				);
 			}).complete(function(){
@@ -99,7 +99,7 @@ var Connection = {
 							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
 								$("<span>").attr("aria-hidden", "true").text("&times;")
 							),
-							$("<p>").text(message);
+							$("<p>").text(message)
 						)
 					);
 				},
@@ -140,7 +140,7 @@ var Connection = {
 							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
 								$("<span>").attr("aria-hidden", "true").text("&times;")
 							),
-							$("<p>").text(message);
+							$("<p>").text(message)
 						)
 					);
 				},
