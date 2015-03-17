@@ -268,7 +268,6 @@ var Player = {
 			var nextToPlay = List.getNextTrack();
 			if(nextToPlay != undefined){
 				Player.changeTrack(nextToPlay);
-				List.update();
 			}
 		});
 	},

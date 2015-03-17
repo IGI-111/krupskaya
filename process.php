@@ -3,7 +3,9 @@ require_once('getid3/getid3.php');
 
 function process($originalFilename, $uploadDirectory, $id)
 {
-	system('sox '.escapeshellarg("/tmp/$originalFilename").' '.$uploadDirectory.$id.'.ogg');
+	system('sox '.escapeshellarg("/tmp/$originalFilename").' '.$uploadDirectory.$id.'.ogg', $returnVar);
+	if($returnVar)
+		die;
 	//the file has just been copied into data
 	$document['_id'] = $id;
 	$document['username'] = $_SESSION['username'];
