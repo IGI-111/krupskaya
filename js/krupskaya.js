@@ -29,7 +29,7 @@ var Connection = {
 				$("#connectionModal .modal-body").prepend(
 					$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
 						$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
-							$("<span>").attr("aria-hidden", "true").text("&times;")
+							$("<span>").attr("aria-hidden", "true").html("&times;")
 						),
 						$("<p>").text("Wrong username or password")
 					)
@@ -97,7 +97,7 @@ var Connection = {
 					$("#uploadModal .modal-body").prepend(
 						$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
 							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
-								$("<span>").attr("aria-hidden", "true").text("&times;")
+								$("<span>").attr("aria-hidden", "true").html("&times;")
 							),
 							$("<p>").text(message)
 						)
@@ -138,7 +138,7 @@ var Connection = {
 					$("#registerModal .modal-body").prepend(
 						$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
 							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
-								$("<span>").attr("aria-hidden", "true").text("&times;")
+								$("<span>").attr("aria-hidden", "true").html("&times;")
 							),
 							$("<p>").text(message)
 						)
@@ -211,12 +211,12 @@ var List = {
 					var album = $("<ul>").addClass("list-group");
 					for (var i = 0, len = data.length; i < len; i++)
 						album.append(
-							$("<li>").addClass("list-group-item").attr("data-file", data[i]._id).text(data[i].title)
+							$("<li>").addClass("list-group-item").attr("data-file", data[i]._id).html(data[i].title)
 						);
 					$('#list').append(
 						$('<div>').addClass("col-md-2").append(
 							$("<div>").addClass('panel').addClass('panel-default').hide().append(
-								$("<div>").addClass("panel-heading").text(data[0].album),
+								$("<div>").addClass("panel-heading").html(data[0].album),
 								album
 							)
 						)
