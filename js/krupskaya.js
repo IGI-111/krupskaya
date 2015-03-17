@@ -278,7 +278,7 @@ var Player = {
 	changeTrack: function(id){
 		Player.playing = id;
 		// change audio value
-		$("#player audio").attr("src", "song.php?r="+id);
+		$("#player audio").attr("src", "data/"+id+".ogg");
 		$("#player .slider").slider("value", 0);
 		// change waveform data
 		$.get("metadata.php",{r:id}, function(data) {
