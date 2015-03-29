@@ -185,7 +185,7 @@ var Connection = {
 
 var List = {
 	getNextTrack: function(){
-		return $("#list .active").next().attr("data-file");
+		return $("#list [data-file='"+Player.playing+"']").next().attr("data-file");
 	},
 	bindUI: function () {
 		$("#list li").click(function(){
