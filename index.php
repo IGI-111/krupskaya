@@ -100,7 +100,7 @@
 												</div>
 												<div class="form-group">
 													<div class="col-xs-10 coll-offset-2">
-														<button type="submit" class="btn btn-success">Upload</button>
+														<button type="submit" class="btn btn-success">Register</button>
 													</div>
 												</div>
 											</form>
