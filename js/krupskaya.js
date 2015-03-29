@@ -27,7 +27,12 @@ var Connection = {
 				Connection.toggle();
 			}).fail(function(){
 				$("#connectionModal .modal-body").prepend(
-					'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>Wrong username or password</p></div>'
+					$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
+						$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
+							$("<span>").attr("aria-hidden", "true").html("&times;")
+						),
+						$("<p>").text("Wrong username or password")
+					)
 				);
 			}).complete(function(){
 				$("#connectionModal :submit").prop("disabled", false);
@@ -90,7 +95,12 @@ var Connection = {
 							message = "Unknown Error.";
 					}
 					$("#uploadModal .modal-body").prepend(
-						'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
+						$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
+							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
+								$("<span>").attr("aria-hidden", "true").html("&times;")
+							),
+							$("<p>").text(message)
+						)
 					);
 				},
 				complete: function() {
@@ -126,7 +136,12 @@ var Connection = {
 							message = "Unknown Error.";
 					}
 					$("#registerModal .modal-body").prepend(
-						'<div role ="alert" class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>'+message+'</p></div>'
+						$("<div>").attr("role", "alert").addClass("alert").addClass("alert-danger").append(
+							$('<button>').attr("type", 'button').addClass('close').attr('data-dismiss', 'alert').attr('aria-label', 'Close').append(
+								$("<span>").attr("aria-hidden", "true").html("&times;")
+							),
+							$("<p>").text(message)
+						)
 					);
 				},
 				complete: function() {
@@ -193,24 +208,19 @@ var List = {
 			var requests = [];
 			for (var i = 0, len = albumList.length; i < len; i++) {
 				requests.push($.get("album.php",{r:albumList[i]}, function(data) {
-					var albumHtml =
-						'<div class="col-md-2">' +
-						'<div style="display:none;" class="panel panel-default">' +
-						'<div class="panel-heading">' +
-						data[0].album +
-						'</div>' +
-						'<ul class="list-group">';
-					for (var i = 0, len = data.length; i < len; i++) {
-						albumHtml +=
-							'<li class="list-group-item" data-file="' + data[i]._id + '" href="#">' +
-							data[i].title +
-							'</li>';
-					}
-					albumHtml +=
-						'</ul>' +
-						'</div>' +
-						'</div>';
-					$("#list").append(albumHtml);
+					var album = $("<ul>").addClass("list-group");
+					for (var i = 0, len = data.length; i < len; i++)
+						album.append(
+							$("<li>").addClass("list-group-item").attr("data-file", data[i]._id).html(data[i].title)
+						);
+					$('#list').append(
+						$('<div>').addClass("col-md-2").append(
+							$("<div>").addClass('panel').addClass('panel-default').hide().append(
+								$("<div>").addClass("panel-heading").html(data[0].album),
+								album
+							)
+						)
+					);
 				}));
 			}
 			$.when.apply($, requests).then(function(){
@@ -258,7 +268,6 @@ var Player = {
 			var nextToPlay = List.getNextTrack();
 			if(nextToPlay != undefined){
 				Player.changeTrack(nextToPlay);
-				List.update();
 			}
 		});
 	},
@@ -268,7 +277,7 @@ var Player = {
 	changeTrack: function(id){
 		Player.playing = id;
 		// change audio value
-		$("#player audio").attr("src", "song.php?r="+id);
+		$("#player audio").attr("src", "data/"+id+".ogg");
 		$("#player .slider").slider("value", 0);
 		// change waveform data
 		$.get("metadata.php",{r:id}, function(data) {
