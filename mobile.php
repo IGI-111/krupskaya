@@ -25,9 +25,7 @@
                 <h1 id="playing">Krupskaya</h1>
                 <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
                     <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
-                    <audio hidden>
-                        <source src="" id="mp3Source" type="audio/mp3">
-                        <source src="" id="oggSource" type="audio/ogg">
+                    <audio preload="auto" hidden>
                     </audio>
                 </div>
                 <div data-role="control-group" class="ui-btn-right" data-type="horizontal">

@@ -185,9 +185,7 @@ var Player = {
         Player.playing = id;
         // change audio value
         $("#player audio")[0].pause();
-        $("#mp3Source").attr("src", "data/"+id+".mp3");
-        $("#oggSource").attr("src", "data/"+id+".ogg");
-        console.log($("#player audio"));
+        $("#player audio").attr("src", "data/"+id+".mp3");
         $("#player audio")[0].load();
 
         // autoplay
