@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Krupskaya</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -44,7 +44,7 @@
                 <div class="navbar-collapse collapse" id="bs-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <button href="#" id="upload" class="btn btn-link navbar-btn" style="display: none;">Upload</button>
+                            <button id="upload" class="btn btn-link navbar-btn" style="display: none;">Upload</button>
                             <div id="uploadModal" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -66,7 +66,7 @@
                                                     <div class="input-group">
                                                           <div class="checkbox">
                                                               <label>
-                                                                  <input value="on" name="public" type="checkbox"> Public                                                              </label>
+                                                                  <input value="on" name="public" type="checkbox"> Public
                                                               </label>
                                                           </div>
                                                     </div>
@@ -82,7 +82,7 @@
                             </div>
                         </li>
                         <li>
-                            <button href="#" id="register" class="btn btn-link navbar-btn" style="display: none;">Register</button>
+                            <button id="register" class="btn btn-link navbar-btn" style="display: none;">Register</button>
                             <div id="registerModal" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -94,7 +94,7 @@
                                             <form class="form-horizontal" action="register.php" method="post">
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
-                                                        <input placeholder="Username" name="username" class="form-control" type="textfield"/>
+                                                        <input placeholder="Username" name="username" class="form-control" type="text"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -117,8 +117,8 @@
                             </div>
                         </li>
                         <li>
-                            <button href="#" class="btn btn-link navbar-btn" id="connect" style="display: none;">Connect</button>
-                            <button href="#" class="btn btn-link navbar-btn" id="disconnect" style="display: none;" href="disconnect.php">Disconnect</button>
+                            <button class="btn btn-link navbar-btn" id="connect" style="display: none;">Connect</button>
+                            <button class="btn btn-link navbar-btn" id="disconnect" style="display: none;">Disconnect</button>
                             <div id="connectionModal" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
