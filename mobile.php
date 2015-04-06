@@ -24,7 +24,7 @@
             <nav data-position="fixed" data-role="header" role="navigation">
                 <h1 id="playing">Krupskaya</h1>
                 <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
-                    <audio>
+                    <audio hidden>
                         <source id="mp3Source" type="audio/mp3">
                         <source id="oggSource" type="audio/ogg">
                     </audio>
