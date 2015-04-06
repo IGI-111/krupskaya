@@ -27,7 +27,7 @@ var Connection = {
                 $.mobile.changePage("#index");
                 Connection.toggle();
             }).fail(function(){
-                //TODO: warn about failure
+                alert("Wrong username or password");
             }).complete(function(){
                 $("#connection :submit").prop("disabled", false);
             });
@@ -50,7 +50,20 @@ var Connection = {
                     List.reload();
                 },
                 error: function(request){
-                    //TODO
+                    var message;
+                    switch(request.status)
+                    {
+                        case 401:
+                            message = "You are not logged in.";
+                        break;
+                        case 422:
+                            message = "File is too big.";
+                        break;
+                        case 500:
+                            default:
+                            message = "Unknown Error.";
+                    }
+                    alert(message);
                 },
                 complete: function() {
                     $("#uploadForm :submit").prop("disabled", false);
