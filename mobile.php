@@ -22,7 +22,7 @@
     <body>
         <div id="index" data-role="page">
             <nav data-position="fixed" data-role="header" role="navigation">
-                <h1 id="playing">Krupskaya</h1>
+                <h1 id="playing"></h1>
                 <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
                     <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
                     <audio preload="auto" hidden>
