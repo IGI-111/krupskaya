@@ -45,29 +45,13 @@ var List = {
 var Player = {
 	playing: undefined,
 	sliderPrecision: 10000,
+	isPaused: true,
 	bindUI: function(){
 		var audio = $("#player audio")[0];
-		$("#player .playButton").on("click", function(){
-			audio.play();
-		});
-		$("#player .pauseButton").on("click", function(){
-			audio.pause();
-		});
-		$("#player .stopButton").on("click", function(){
-			audio.pause();
-			audio.currentTime = 0;
-		});
-		$("#player .togglePlayer").on("click", function(){
-			$("#complexPlayer").toggle("blind");
-			$("#simplePlayer").toggle("blind");
-		});
-		$("#player .slider").slider({
-			max: Player.sliderPrecision,
-			orientation: "horizontal",
-			range: "min",
-			animate: 1000
-		}).on("slide", function(event, ui) {
-			audio.currentTime = audio.duration*(ui.value / Player.sliderPrecision);
+		$("#player .playPauseButton").on("click", function(){
+			this.isPaused ? audio.play() : audio.pause();
+			this.isPaused = !this.isPaused;
+			$(this).toggleClass("glyphicon-play").toggleClass("glyphicon-pause");
 		});
 		$("#player audio").on("timeupdate", function(event, ui){
 			var pos = Player.sliderPrecision*(audio.currentTime / audio.duration);
@@ -90,10 +74,11 @@ var Player = {
 		$("#player .slider").slider("value", 0);
 		// change title
 		$.get("metadata.php",{r:id}, function(data) {
-			//TODO
+			$("#playing").html(data.title);
 		});
 		// autoplay
 		$("#player audio")[0].play();
+		$("#player .playPauseButton").addClass("glyphicon-pause").removeClass("glyphicon-play");
 		// update list
 		List.update();
 	},

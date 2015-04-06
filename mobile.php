@@ -9,6 +9,7 @@
 
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
 		<link rel="stylesheet" href="css/bootsrap-glyphicons.min.css">
+		<link rel="stylesheet" href="css/krupskaya-mobile.css">
 		<style>
 			body {
 				padding-top: 50px;
@@ -20,14 +21,11 @@
 	</head>
 	<body>
 		<div data-role="page">
-		<nav data-role="header" role="navigation">
-			<div id="player">
+		<nav data-position="fixed" data-role="header" role="navigation">
+			<h1 id="playing">Krupskaya</h1>
+			<div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
 				<audio hidden src=""></audio>
-				<div id="player" class="well">
-					<button class="glyphicon glyphicon-play btn btn-success playButton"></button>
-					<button class="glyphicon glyphicon-pause btn btn-info pauseButton"></button>
-					<button class="glyphicon glyphicon-stop btn btn-danger stopButton"></button>
-				</div>
+				<button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
 			</div>
 		</nav>
 		<section class="ui-content">
