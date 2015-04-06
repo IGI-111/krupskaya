@@ -149,8 +149,8 @@
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div id="player">
                 <audio hidden>
-                    <source id="mp3Source" type="audio/mp3">
-                    <source id="oggSource" type="audio/ogg">
+                    <source src="" id="mp3Source" type="audio/mp3">
+                    <source src="" id="oggSource" type="audio/ogg">
                 </audio>
                 <div id="simplePlayer" style="display:none;">
                     <div class="buttons">

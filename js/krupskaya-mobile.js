@@ -186,6 +186,7 @@ var Player = {
         // change audio value
         $("#mp3Source").attr("src", "data/"+id+".mp3");
         $("#oggSource").attr("src", "data/"+id+".ogg");
+        console.log($("#player audio"));
         $("#player audio")[0].load();
 
         $("#player .slider").slider("value", 0);

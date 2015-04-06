@@ -24,11 +24,11 @@
             <nav data-position="fixed" data-role="header" role="navigation">
                 <h1 id="playing">Krupskaya</h1>
                 <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
-                    <audio hidden>
-                        <source id="mp3Source" type="audio/mp3">
-                        <source id="oggSource" type="audio/ogg">
-                    </audio>
                     <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
+                    <audio hidden>
+                        <source src="" id="mp3Source" type="audio/mp3">
+                        <source src="" id="oggSource" type="audio/ogg">
+                    </audio>
                 </div>
                 <div data-role="control-group" class="ui-btn-right" data-type="horizontal">
                     <button style="display:none;" id="connect" class="ui-btn">Connect</button>
