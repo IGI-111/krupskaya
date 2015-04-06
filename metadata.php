@@ -7,7 +7,7 @@ $db = $m->krupskaya;
 $collection = $db->songs;
 $query = array('_id' => $id,
     '$or' => array(
-        array("username" => $_SESSION['username']),
+        array("username" => (isset($_SESSION['username']) ? $_SESSION['username'] : '')),
         array("public" => true))
     );
 $result = $collection->findOne($query);

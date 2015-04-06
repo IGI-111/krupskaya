@@ -20,18 +20,49 @@
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
-        <div data-role="page">
-        <nav data-position="fixed" data-role="header" role="navigation">
-            <h1 id="playing">Krupskaya</h1>
-            <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
-                <audio hidden src=""></audio>
-                <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
-            </div>
-        </nav>
-        <section class="ui-content">
-            <ul id="list" data-role="listview">
-            </ul>
-        </section>
+        <div id="index" data-role="page">
+            <nav data-position="fixed" data-role="header" role="navigation">
+                <h1 id="playing">Krupskaya</h1>
+                <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
+                    <audio hidden src=""></audio>
+                    <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
+                </div>
+                <div data-role="control-group" class="ui-btn-right" data-type="horizontal">
+                    <button style="display:none;" id="connect" class="ui-btn">Connect</button>
+                    <button style="display:none;" id="disconnect" class="ui-btn">Disconnect</button>
+                    <button style="display:none;" id="upload" class="ui-btn">Upload</button>
+                    <button style="display:none;" id="register" class="ui-btn">Register</button>
+                </div>
+            </nav>
+            <section class="ui-content">
+                <ul id="list" data-role="listview">
+                </ul>
+            </section>
+        </div>
+        <div data-role="page" id="connection">
+            <div data-role="header"><h1>Sign In</h1></div>
+            <form action="connect.php" method="post">
+                <input name="login" placeholder="Login" class="form-control" type="text">
+                <input name="password" placeholder="Password" class="form-control" type="password">
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div>
+        <div data-role="page" id="uploadForm">
+            <div data-role="header"><h1>Upload file</h1></div>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input multiple="multiple" id="uploadFileInput" name="f[]" class="form-control" type="file"/>
+                <label><input value="on" name="public" type="checkbox"> Public  </label>
+                <button type="submit" class="btn btn-success">Upload</button>
+            </form>
+        </div>
+        <div data-role="page" id="registerForm">
+            <div data-role="header"><h1>Register</h1></div>
+            <form class="form-horizontal" action="register.php" method="post">
+                <input placeholder="Username" name="username" type="text"/>
+                <input placeholder="Password" value="" name="password" type="password"/>
+                <input placeholder="Repeat" value="" type="password"/>
+                <button type="submit" class="btn btn-success">Ok</button>
+            </form>
         </div>
 <script src="js/vendor/jquery-1.11.2.min.js"></script>
 <script src="js/vendor/jquery.mobile-1.4.5.min.js"></script>

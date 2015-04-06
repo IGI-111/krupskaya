@@ -6,5 +6,5 @@ $collection = $db->songs;
 header('Content-Type: application/json');
 echo json_encode($collection->distinct("_id"), array(
     '$or' => array(
-        array("username" => $_SESSION['username']),
+        array("username" => (isset($_SESSION['username']) ? $_SESSION['username'] : '')),
         array("public" => true))));

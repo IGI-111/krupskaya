@@ -8,7 +8,7 @@ $collection = $db->songs;
 $query = array('$query' => array(
         'album' => $album,
         '$or' => array(
-            array("username" => $_SESSION['username']),
+            array("username" => (isset($_SESSION['username']) ? $_SESSION['username'] : '')),
             array("public" => true)
             )
         ),

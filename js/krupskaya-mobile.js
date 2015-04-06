@@ -1,3 +1,117 @@
+var Connection = {
+    status: undefined,
+    toggle: function(){
+        $("#connect").toggle();
+        $("#disconnect").toggle();
+        $("#register").toggle();
+        $("#upload").toggle();
+        this.status = !this.status;
+        List.reload();
+    },
+    bindUI: function() {
+        // setup connection buttons
+        $("#disconnect").click(function(){
+            $(this).prop("disabled", true);
+            $.post("disconnect.php");
+            Connection.toggle();
+            $(this).prop("disabled", false);
+        });
+        $("#connect").click(function(){
+            $.mobile.changePage( "#connection", { role: "dialog" } );
+        });
+        $("#connection form").submit(function(event){
+            $("#connection :submit").prop("disabled", true);
+            event.preventDefault();
+            $.post("connect.php", $("#connection form").serialize())
+            .done(function(){
+                $.mobile.changePage("#index");
+                Connection.toggle();
+            }).fail(function(){
+                //TODO: warn about failure
+            }).complete(function(){
+                $("#connection :submit").prop("disabled", false);
+            });
+        });
+        // setup upload button
+        $("#upload").click(function(){
+            $.mobile.changePage("#uploadForm", { role: "dialog" });
+        });
+        $("#uploadForm form").submit(function(event){
+            $("#uploadForm :submit").prop("disabled", true);
+            event.preventDefault();
+            $.ajax({
+                url: 'upload.php',
+                type: 'POST',
+                data: new FormData($("#uploadForm form")[0]),
+                contentType: false,
+                processData: false,
+                success: function(){
+                    $.mobile.changePage("#index");
+                    List.reload();
+                },
+                error: function(request){
+                    //TODO
+                },
+                complete: function() {
+                    $("#uploadForm :submit").prop("disabled", false);
+                }
+            });
+        });
+        //setup register button
+        $("#register").click(function(){
+            $.mobile.changePage("#registerForm", { role: "dialog" });
+        });
+        $("#registerForm form").submit(function(event){
+            $("#registerForm :submit").prop("disabled", true);
+            event.preventDefault();
+            $.ajax({
+                url: 'register.php',
+                type: 'POST',
+                data: $("#registerForm form").serialize(),
+                success: function(){
+                    $.mobile.changePage("#index");
+                },
+                error: function(request){
+                    //TODO
+                },
+                complete: function() {
+                    $("#registerForm :submit").prop("disabled", false);
+                }
+            });
+        });
+        $("#registerForm input[type='password']").keyup(function(){
+            var validated = true;
+            var value = undefined;
+            $("#registerForm input[type='password']").each(function(index){
+                if(index == 0)
+                    value = $(this).val();
+                else if($(this).val() != value)
+                    validated = false;
+            });
+            if(!validated){
+                $("#registerForm input[type='password']").css("color", "red");
+                $("#registerForm :submit").prop("disabled", true);
+            }else{
+                $("#registerForm input[type='password']").css("color", "green");
+                $("#registerForm :submit").prop("disabled", false);
+            }
+        });
+    },
+    init: function(){
+        Connection.bindUI();
+        $.get("connected.php", function(isConnected) {
+            this.status = isConnected;
+            if(this.status){
+                $("#upload").show();
+                $("#disconnect").show();
+            }
+            else{
+                $("#register").show();
+                $("#connect").show();
+            }
+        });
+    }
+};
 var List = {
     getNextTrack: function(){
         return $("#list [data-file='"+Player.playing+"']").next().attr("data-file");
@@ -85,7 +199,7 @@ var Player = {
 };
 
 $(document).ready(function(){
-    // Connection.init();
+    Connection.init();
     Player.init();
     List.init();
 });
