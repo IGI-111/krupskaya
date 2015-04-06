@@ -123,8 +123,8 @@ var List = {
         });
     },
     update: function() {
-        $("#list [data-theme='b']").removeAttr("data-theme").trigger("mouseout");
-        $("#list [data-file='"+Player.playing+"']").attr("data-theme",'a').trigger("mouseout");
+        $("#list .ui-btn-active").toggleClass("ui-btn-active");
+        $("#list [data-file='"+Player.playing+"']").toggleClass("ui-btn-active");
     },
     reload: function() {
         $("#list").empty();
