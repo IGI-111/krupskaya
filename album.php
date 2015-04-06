@@ -1,7 +1,7 @@
 <?php
 session_start();
 // assure that you get only strings
-$album = filter_var($_GET['r'], FILTER_SANITIZE_STRING);
+$album = $_GET['r'];
 $m = new MongoClient();
 $db = $m->krupskaya;
 $collection = $db->songs;

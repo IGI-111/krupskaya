@@ -114,7 +114,7 @@ var Connection = {
 };
 var List = {
     getNextTrack: function(){
-        return $("#list [data-file='"+Player.playing+"']").next().attr("data-file");
+        return $("#list [data-file='"+Player.playing+"']").parent().next().children().attr("data-file");
     },
     bindUI: function () {
         $("#list a").click(function(){
@@ -197,7 +197,7 @@ var Player = {
             if(audioReady>2) {
                 audioElement.play();
                 $("#player").toggle();
-            } else if(audioElement.error) { //like, DUDE, something went wrong!
+            } else if(audioElement.error) {
                 var errorText=['(no error)','User interrupted download','Network error caused interruption','Miscellaneous problem with media data','Cannot actually decode this media'];
                 alert("Something went wrong!\n"+errorText[audioElement.error.code]);
                 $("#player").toggle();
