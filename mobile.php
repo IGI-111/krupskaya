@@ -24,8 +24,7 @@
             <nav data-position="fixed" data-role="header" role="navigation">
                 <h1 id="playing">Krupskaya</h1>
                 <div id="player" data-role="control-group" class="ui-btn-left" data-type="horizontal">
-                    <button class="glyphicon glyphicon-play playPauseButton ui-btn"></button>
-                    <audio hidden>
+                    <audio controls style="display: inline; height:30px;" data-role="none">
                         <source src="" id="mp3Source" type="audio/mp3">
                         <source src="" id="oggSource" type="audio/ogg">
                     </audio>
