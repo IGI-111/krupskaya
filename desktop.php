@@ -148,7 +148,10 @@
         <section>
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div id="player">
-                <audio hidden src=""></audio>
+                <audio hidden>
+                    <source id="mp3Source" type="audio/mp3">
+                    <source id="oggSource" type="audio/ogg">
+                </audio>
                 <div id="simplePlayer" style="display:none;">
                     <div class="buttons">
                         <button class="glyphicon glyphicon-play btn btn-success playButton btn-xs"></button>

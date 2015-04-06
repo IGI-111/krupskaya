@@ -4,6 +4,7 @@ require_once('getid3/getid3.php');
 function process($originalFilename, $uploadDirectory, $id)
 {
     system('sox '.escapeshellarg("/tmp/$originalFilename").' '.$uploadDirectory.$id.'.ogg', $returnVar);
+    system('sox '.escapeshellarg("/tmp/$originalFilename").' '.$uploadDirectory.$id.'.mp3', $returnVar);
     if($returnVar)
         die;
     //the file has just been copied into data
