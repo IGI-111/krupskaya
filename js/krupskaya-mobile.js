@@ -184,17 +184,32 @@ var Player = {
     changeTrack: function(id){
         Player.playing = id;
         // change audio value
+        $("#player audio")[0].pause();
         $("#mp3Source").attr("src", "data/"+id+".mp3");
         $("#oggSource").attr("src", "data/"+id+".ogg");
         console.log($("#player audio"));
         $("#player audio")[0].load();
 
-        $("#player .slider").slider("value", 0);
-        // change title
-        $.get("metadata.php",{r:id}, function(data) {
-            $("#playing").html(data.title);
-        });
         // autoplay
+        function playWhenReady()
+        {
+            audioElement=$("#player audio")[0];
+            var audioReady=audioElement.readyState;
+            var readyText=['(Not Yet Loaded)','(Got Metadata)','*-=Loading=-*','*-=Buffering=-*','*-=PLAY!=-*'];
+            if(audioReady>2) {
+                audioElement.play();
+                $("#player").toggle();
+            } else if(audioElement.error) { //like, DUDE, something went wrong!
+                var errorText=['(no error)','User interrupted download','Network error caused interruption','Miscellaneous problem with media data','Cannot actually decode this media'];
+                alert("Something went wrong!\n"+errorText[audioElement.error.code]);
+                $("#player").toggle();
+            } else { //check for media ready again in half a second
+                setTimeout(playWhenReady,500);
+            }
+        }
+        $("#player").toggle();
+        playWhenReady();
+
         $("#player audio")[0].play();
         $("#player .playPauseButton").addClass("glyphicon-pause").removeClass("glyphicon-play");
         // update list
